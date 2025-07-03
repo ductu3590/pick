@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điều lệ: Giải Pickleball các CLB Hana 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Removed flowchart-arrow specific styles as it's replaced by grid layout */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #FFA600;
+            border: 4px solid #f0f4f8;
+        }
+        .content-selector {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .content-selector:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .content-selector.active {
+            background-color: #366682;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-7xl font-black text-[#003F5C] uppercase tracking-wider mb-2">ĐIỀU LỆ</h1>
+            <h2 class="text-4xl md:text-6xl font-black text-[#003F5C] tracking-wider">Giải Pickleball các CLB Hana</h2>
+            <p class="text-2xl md:text-3xl font-bold text-[#366682] mt-2">Diễn ra trong 2 ngày 19 & 20 Tháng 7, 2025</p>
+            <p class="text-lg text-gray-600 mt-2">Tại Sân Pickleball Hana, 35 Lê Trực, phường Yên Bái, tỉnh Lào Cai</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Mục Đích & Yêu Cầu Giải Đấu</h2>
+                <p class="text-gray-700 mb-4">Giải đấu được tổ chức với các mục đích và yêu cầu rõ ràng nhằm đảm bảo một sự kiện thể thao thành công và ý nghĩa:</p>
+                <h3 class="text-xl font-semibold text-[#366682] mb-2">Mục đích:</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Tạo sân chơi giao lưu, học hỏi kinh nghiệm giữa các vận động viên (VĐV) và CLB Pickleball sinh hoạt tại sân Pickleball HANA.</li>
+                    <li>Nâng cao trình độ chuyên môn, gắn kết cộng đồng yêu Pickleball.</li>
+                </ul>
+                <h3 class="text-xl font-semibold text-[#366682] mb-2">Yêu cầu:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li>Giải đấu diễn ra <strong>công bằng, trung thực, đoàn kết</strong> và <strong>an toàn</strong>.</li>
+                    <li>Các VĐV chấp hành <strong>nghiêm túc điều lệ</strong> và các quy định của Ban Tổ chức (BTC).</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                <span class="text-6xl font-black text-[#FFA600]">4</span>
+                <p class="text-xl font-bold text-[#003F5C] mt-2">Nội dung thi đấu</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                <span class="text-6xl font-black text-[#FFA600]">2</span>
+                <p class="text-xl font-bold text-[#003F5C] mt-2">Ngày tranh tài</p>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-6">Thể Thức Bốc Thăm Độc Đáo</h2>
+                <p class="text-gray-700 text-center mb-6">Để tăng tính bất ngờ và cơ hội giao lưu, giải đấu áp dụng thể thức <strong>bốc thăm ngẫu nhiên</strong> cho các cặp đôi.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+                    <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm w-full max-w-[250px]">
+                        <div class="text-5xl font-black text-[#FFA600] mb-2">1</div>
+                        <h3 class="text-lg font-bold text-[#366682] mb-1">Đăng ký Nội dung</h3>
+                        <p class="text-sm text-gray-600">VĐV chọn nội dung thi đấu phù hợp.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm w-full max-w-[250px]">
+                        <div class="text-5xl font-black text-[#FFA600] mb-2">2</div>
+                        <h3 class="text-lg font-bold text-[#366682] mb-1">Bốc thăm Ngẫu nhiên</h3>
+                        <p class="text-sm text-gray-600">BTC bốc thăm để ghép cặp ngẫu nhiên.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm w-full max-w-[250px]">
+                        <div class="text-5xl font-black text-[#FFA600] mb-2">3</div>
+                        <h3 class="text-lg font-bold text-[#366682] mb-1">Tìm Đồng đội Mới</h3>
+                        <p class="text-sm text-gray-600">Thi đấu cùng đồng đội được chỉ định.</p>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-6">Thể thức này tạo ra những cặp đấu <strong>bất ngờ</strong> và đề cao tinh thần <strong>giao lưu, kết nối</strong>.</p>
+            </div>
+            
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Nội Dung & Đối Tượng Tham Gia</h2>
+                <p class="text-gray-700 mb-4 text-center">Giải đấu dành cho các VĐV thuộc các CLB sinh hoạt tại sân Pickleball Hana, với 4 nội dung thi đấu. Hãy nhấp vào từng nội dung để xem chi tiết:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div id="doiNamBtn" class="content-selector bg-gray-100 p-4 rounded-lg text-center font-semibold text-[#003F5C] hover:bg-gray-200">
+                        Đôi Nam
+                    </div>
+                    <div id="doiNuBtn" class="content-selector bg-gray-100 p-4 rounded-lg text-center font-semibold text-[#003F5C] hover:bg-gray-200">
+                        Đôi Nữ
+                    </div>
+                    <div id="doiNamNuBtn" class="content-selector bg-gray-100 p-4 rounded-lg text-center font-semibold text-[#003F5C] hover:bg-gray-200">
+                        Đôi Nam Nữ
+                    </div>
+                </div>
+                <div id="contentDescription" class="bg-gray-50 p-6 rounded-lg shadow-inner text-gray-800 transition-all duration-300 ease-in-out">
+                    <p class="text-center italic text-gray-600">Chọn một nội dung thi đấu để xem chi tiết.</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Thể Thức Thi Đấu & Luật Thi Đấu</h2>
+                <p class="text-gray-700 mb-4">Các trận đấu sẽ được diễn ra theo luật quốc tế, đảm bảo tính chuyên nghiệp và công bằng:</p>
+                <h3 class="text-xl font-semibold text-[#366682] mb-2">Thể thức bốc thăm và ghép cặp:</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>VĐV đăng ký tham gia nội dung cụ thể (<strong>Đôi Nam Phong trào/Open, Đôi Nữ, Đôi Nam Nữ</strong>).</li>
+                    <li>Sau khi chốt danh sách đăng ký, BTC sẽ tiến hành <strong>bốc thăm bắt cặp ngẫu nhiên</strong> cho tất cả các VĐV trong cùng một nội dung (không bốc theo CLB).</li>
+                </ul>
+                <h3 class="text-xl font-semibold text-[#366682] mb-2">Thể thức thi đấu:</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Thể thức thi đấu cụ thể (<strong>chia bảng vòng tròn tính điểm, đấu loại trực tiếp</strong>,...) sẽ được BTC công bố chi tiết sau khi có số lượng VĐV đăng ký chính thức cho từng nội dung.</li>
+                    <li>Các trận đấu sẽ thi đấu đến <strong>điểm 11, cách 2 điểm</strong> (hoặc đến <strong>điểm 15, cách 2 điểm</strong> tùy theo số lượng VĐV và thời gian cho phép).</li>
+                    <li>BTC sẽ thông báo cụ thể về <strong>số trận đấu</strong> và <strong>cách tính điểm chi tiết</strong> trước ngày thi đấu.</li>
+                </ul>
+                <h3 class="text-xl font-semibold text-[#366682] mb-2">Luật thi đấu:</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Áp dụng <strong>Luật Pickleball Quốc tế (IFP)</strong> hiện hành.</li>
+                    <li>BTC có quyền đưa ra các điều chỉnh nhỏ cho phù hợp với điều kiện thực tế của giải, và sẽ thông báo công khai trước giải đấu.</li>
+                </ul>
+                <h3 class="text-xl font-semibold text-[#366682] mb-2">Bóng thi đấu:</h3>
+                <p class="text-gray-700">Sử dụng <strong>bóng của Nhà Tài trợ</strong> chính thức của giải (công bố sau).</p>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Cơ Cấu Kinh Phí</h2>
+                <p class="text-center text-gray-600 mb-6">Giải đấu được xây dựng từ sự chung tay của nhà tài trợ và cộng đồng, đảm bảo nguồn lực cho việc tổ chức chuyên nghiệp.</p>
+                <div class="chart-container">
+                    <canvas id="fundingChart"></canvas>
+                </div>
+                <p class="text-center text-gray-700 mt-4 text-sm">Chủ sân Hana tài trợ <strong>10.000.000 VNĐ</strong>. Phần còn lại do VĐV đóng góp.</p>
+            </div>
+            
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-8">Lịch Trình Giải Đấu</h2>
+                <p class="text-gray-700 text-center mb-4">Giải đấu sẽ diễn ra trong <strong>2 ngày</strong> với lịch trình chi tiết như sau:</p>
+                <div class="relative pl-8 border-l-4 border-[#366682]">
+                    <div class="timeline-item mb-12">
+                        <h3 class="text-xl font-bold text-[#003F5C]">Ngày 1: 19/07/2025</h3>
+                        <p class="text-gray-700">Khai mạc & Vòng loại</p>
+                        <p class="text-sm text-gray-500">Các trận đấu vòng bảng của tất cả các nội dung sẽ diễn ra sôi nổi để tìm ra những cặp đấu xuất sắc nhất.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-[#003F5C]">Ngày 2: 20/07/2025</h3>
+                        <p class="text-gray-700">Chung kết & Trao giải</p>
+                        <p class="text-sm text-gray-500">Các trận đấu chung kết hấp dẫn, tìm ra nhà vô địch và Lễ bế mạc, trao giải thưởng.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 text-center">
+                <h2 class="text-2xl font-bold text-[#003F5C] mb-6">Giải Thưởng Hấp Dẫn</h2>
+                <p class="text-gray-700 mb-4">Cơ cấu giải thưởng sẽ được BTC công bố chi tiết, hứa hẹn những phần quà <strong>xứng đáng</strong> cho các VĐV xuất sắc.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl">🏆</span>
+                        <p class="text-lg font-semibold mt-2">Cúp Vô Địch</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl">🥇</span>
+                        <p class="text-lg font-semibold mt-2">Huy Chương</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-6xl">🎁</span>
+                        <p class="text-lg font-semibold mt-2">Quà của Nhà tài trợ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Các Quy Định Khác</h2>
+                <p class="text-gray-700 mb-4">Để đảm bảo giải đấu diễn ra suôn sẻ và công bằng, các VĐV cần lưu ý những quy định sau:</p>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li><strong>Trang phục:</strong> VĐV tham gia thi đấu phải mặc trang phục thể thao lịch sự, phù hợp với môn Pickleball.</li>
+                    <li><strong>Trọng tài:</strong> Trọng tài điều hành trận đấu có quyền quyết định cuối cùng trong mọi tình huống. Các VĐV phải tuân thủ quyết định của trọng tài.</li>
+                    <li><strong>Khiếu nại:</strong> Mọi khiếu nại phải được gửi bằng văn bản đến BTC trong vòng <strong>15 phút</strong> sau khi trận đấu kết thúc. BTC sẽ xem xét và đưa ra quyết định cuối cùng.</li>
+                    <li><strong>An toàn:</strong> VĐV tự chịu trách nhiệm về sức khỏe của bản thân trong suốt quá trình tham gia giải. BTC sẽ có bộ phận y tế hỗ trợ sơ cứu ban đầu.</li>
+                    <li><strong>Quyền của BTC:</strong> BTC có quyền thay đổi, bổ sung điều lệ giải đấu nếu thấy cần thiết để đảm bảo sự thành công của giải, và sẽ thông báo công khai tới các VĐV.</li>
+                </ul>
+            </div>
+
+            <div class="md:col-span-2 bg-[#003F5C] text-white rounded-lg shadow-lg p-8 text-center">
+                <h2 class="text-3xl font-black">SẴN SÀNG THAM GIA?</h2>
+                <p class="mt-2 mb-4">Liên hệ Ban Tổ Chức để đăng ký và biết thêm chi tiết về lệ phí tham dự.</p>
+                <a href="#" class="inline-block bg-[#FFA600] text-[#003F5C] font-bold py-3 px-8 rounded-lg hover:bg-yellow-400 transition-colors">ĐĂNG KÝ NGAY</a>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#003F5C',
+                        font: {
+                            size: 14,
+                            family: "'Be Vietnam Pro', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    bodyFont: {
+                        family: "'Be Vietnam Pro', sans-serif"
+                    },
+                    titleFont: {
+                        family: "'Be Vietnam Pro', sans-serif"
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: {
+                        color: '#366682'
+                    },
+                    grid: {
+                        color: '#e0e0e0'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#366682'
+                    },
+                    grid: {
+                        color: '#e0e0e0'
+                    }
+                }
+            }
+        };
+
+        const fundingCtx = document.getElementById('fundingChart').getContext('2d');
+        new Chart(fundingCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Tài trợ từ Sân Hana', 'Lệ phí từ VĐV (Dự kiến)'],
+                datasets: [{
+                    data: [10, 15], 
+                    backgroundColor: ['#003F5C', '#FFA600'],
+                    borderColor: '#FFFFFF',
+                    borderWidth: 4,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                ...defaultChartOptions,
+                plugins: {
+                    ...defaultChartOptions.plugins,
+                    tooltip: {
+                        ...defaultChartOptions.plugins.tooltip,
+                        callbacks: {
+                            ...defaultChartOptions.plugins.tooltip.callbacks,
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed.toLocaleString('vi-VN') + ' triệu VNĐ';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: { display: false },
+                    x: { display: false }
+                }
+            }
+        });
+
+        const contentDescriptions = {
+            'doiNam': `
+                <h3 class="text-xl font-semibold text-[#003F5C] mb-2">Đôi Nam:</h3>
+                <ul class="list-disc list-inside text-gray-700">
+                    <li><strong>Nội dung Phong trào:</strong> Dành cho các VĐV mới chơi, chưa có nhiều kinh nghiệm.</li>
+                    <li><strong>Nội dung Open:</strong> Dành cho các VĐV có kinh nghiệm, trình độ tốt.</li>
+                </ul>
+            `,
+            'doiNu': `
+                <h3 class="text-xl font-semibold text-[#003F5C] mb-2">Đôi Nữ:</h3>
+                <p class="text-gray-700">Bốc thăm ngẫu nhiên, không chia trình độ.</p>
+            `,
+            'doiNamNu': `
+                <h3 class="text-xl font-semibold text-[#003F5C] mb-2">Đôi Nam Nữ:</h3>
+                <p class="text-gray-700">Bốc thăm ngẫu nhiên, không chia trình độ.</p>
+            `
+        };
+
+        const doiNamBtn = document.getElementById('doiNamBtn');
+        const doiNuBtn = document.getElementById('doiNuBtn');
+        const doiNamNuBtn = document.getElementById('doiNamNuBtn');
+        const contentDescriptionDiv = document.getElementById('contentDescription');
+
+        function updateContent(contentKey, activeBtn) {
+            contentDescriptionDiv.innerHTML = contentDescriptions[contentKey];
+            document.querySelectorAll('.content-selector').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('bg-[#366682]', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-[#003F5C]');
+            });
+            activeBtn.classList.add('active', 'bg-[#366682]', 'text-white');
+            activeBtn.classList.remove('bg-gray-100', 'text-[#003F5C]');
+        }
+
+        doiNamBtn.addEventListener('click', () => updateContent('doiNam', doiNamBtn));
+        doiNuBtn.addEventListener('click', () => updateContent('doiNu', doiNuBtn));
+        doiNamNuBtn.addEventListener('click', () => updateContent('doiNamNu', doiNamNuBtn));
+
+        updateContent('doiNam', doiNamBtn);
+    </script>
+
+</body>
+</html>
