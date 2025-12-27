@@ -1,0 +1,14 @@
+{
+  "name": "hana-pickleball-cup",
+  "version": "1.0.0",
+  "description": "HANA PICKLEBALL - END YEAR CUP Tournament Website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "preview": "npx serve ."
+  },
+  "keywords": ["pickleball", "tournament", "sports"],
+  "author": "",
+  "license": "MIT"
+}
