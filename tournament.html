@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Giải Đấu - HANA PICKLEBALL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+
+        .bg-pickleball { background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%); }
+
+        .match-card { transition: all 0.2s; }
+        .match-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+
+        .score-input {
+            width: 60px;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .game-type-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .rank-badge {
+            font-size: 0.875rem;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; }
+        .rank-2 { background: linear-gradient(135deg, #c0cfee, #a5b4fc); color: white; }
+        .rank-3 { background: linear-gradient(135deg, #fed7aa, #fbcf8f); color: white; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800">
+
+    <!-- Header -->
+    <header class="bg-pickleball text-white shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="index.html" class="flex items-center space-x-3 hover:opacity-80 transition">
+                    <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-blue-900 font-bold text-xl">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-black uppercase text-yellow-300">HANA PICKLEBALL</h1>
+                        <p class="text-[10px] font-bold tracking-wider text-blue-100">Quản Lý Giải Đấu</p>
+                    </div>
+                </a>
+            </div>
+            <nav class="flex space-x-2">
+                <button onclick="switchView('schedule')" id="btn-schedule" class="px-4 py-2 rounded-lg font-bold text-sm hover:bg-white/20 transition active:bg-white/30">
+                    <i class="fas fa-calendar mr-2"></i>Lịch Thi Đấu
+                </button>
+                <button onclick="switchView('standings')" id="btn-standings" class="px-4 py-2 rounded-lg font-bold text-sm hover:bg-white/20 transition">
+                    <i class="fas fa-chart-bar mr-2"></i>Bảng Xếp Hạng
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <!-- SCHEDULE VIEW -->
+        <section id="schedule-view" class="animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2">Lịch Chi Tiết Thi Đấu</h2>
+                <p class="text-slate-600">Cập nhật tỷ số từng game, hệ thống sẽ tự động tính điểm và cập nhật bảng xếp hạng</p>
+            </div>
+
+            <!-- Round Tabs -->
+            <div class="flex overflow-x-auto space-x-2 mb-8 pb-2" id="round-tabs-container">
+                <!-- Filled by JS -->
+            </div>
+
+            <!-- Matches for Selected Round -->
+            <div id="matches-container" class="space-y-6">
+                <!-- Filled by JS -->
+            </div>
+        </section>
+
+        <!-- STANDINGS VIEW (Hidden by default) -->
+        <section id="standings-view" class="hidden animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2">Bảng Xếp Hạng</h2>
+                <p class="text-slate-600">Xếp hạng được cập nhật tự động khi có kết quả mới</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Standings Table -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden col-span-full">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
+                        <h3 class="text-xl font-bold">Xếp Hạng Toàn Giải</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                <tr class="text-left text-xs font-bold uppercase tracking-wide text-slate-600">
+                                    <th class="px-6 py-3">Xếp Hạng</th>
+                                    <th class="px-6 py-3">Đội</th>
+                                    <th class="px-6 py-3 text-center">Trận Thắng</th>
+                                    <th class="px-6 py-3 text-center">Game Thắng</th>
+                                    <th class="px-6 py-3 text-center">Hiệu Điểm</th>
+                                </tr>
+                            </thead>
+                            <tbody id="standings-tbody">
+                                <!-- Filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 col-span-full">
+                    <h3 class="text-lg font-bold mb-6">Thống Kê Chung</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4" id="stats-container">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center mt-20">
+        <p class="font-medium text-sm">HANA PICKLEBALL CLUB - Tournament Management</p>
+    </footer>
+
+    <!-- Score Update Modal -->
+    <div id="score-modal" class="hidden fixed inset-0 bg-black/50 z-40 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 sticky top-0">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold" id="modal-title">Cập Nhật Tỷ Số</h2>
+                    <button onclick="closeScoreModal()" class="text-2xl hover:opacity-80"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+
+            <div class="p-6" id="modal-content">
+                <!-- Filled by JS -->
+            </div>
+
+            <div class="border-t p-6 flex gap-4 justify-end">
+                <button onclick="closeScoreModal()" class="px-6 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 font-bold transition">
+                    Hủy
+                </button>
+                <button onclick="saveScores()" class="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold transition flex items-center gap-2">
+                    <span id="save-btn-text">Lưu Tỷ Số</span>
+                    <span id="save-loading" class="hidden loading"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =====================================================================
+        // SUPABASE INITIALIZATION
+        // =====================================================================
+        const SUPABASE_URL = 'https://qnglmiwkflbrkogfpczl.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJib2x0IiwicmVmIjoiMGVjOTBiNTdkNmU5NWZjYmRhMTk4MzJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg4ODE1NzQsImV4cCI6MTc1ODg4MTU3NH0.9I8-U0x86Ak8t2DGaIk0HfvTSLsAyzdnz-Nw00mMkKw';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // =====================================================================
+        // TEAM DATA (From main page)
+        // =====================================================================
+        const TEAMS_DATA = [
+            { id: 1, name: "TEAM 1", color: "blue" },
+            { id: 2, name: "TEAM 2", color: "emerald" },
+            { id: 3, name: "TEAM 3", color: "orange" },
+            { id: 4, name: "TEAM 4", color: "purple" },
+            { id: 5, name: "TEAM 5", color: "pink" }
+        ];
+
+        const GAME_TYPES = {
+            blue_pair: 'Đôi Xanh',
+            red_pair: 'Đôi Đỏ',
+            mixed_pair_1: 'Đôi Phối Hợp 1',
+            mixed_pair_2: 'Đôi Phối Hợp 2'
+        };
+
+        // =====================================================================
+        // STATE
+        // =====================================================================
+        let currentRound = 1;
+        let currentMatchId = null;
+        let matchesData = [];
+        let standingsData = [];
+        let gamesForUpdate = [];
+
+        // =====================================================================
+        // INITIALIZATION
+        // =====================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTournamentData();
+        });
+
+        async function loadTournamentData() {
+            try {
+                // Load all matches and games
+                const { data: matches, error: matchError } = await supabase
+                    .from('matches')
+                    .select('*')
+                    .order('round', { ascending: true });
+
+                if (matchError) throw matchError;
+                matchesData = matches;
+
+                // Load standings
+                const { data: standings, error: standingError } = await supabase
+                    .from('standings')
+                    .select('*')
+                    .order('rank', { ascending: true });
+
+                if (standingError) throw standingError;
+                standingsData = standings;
+
+                renderRoundTabs();
+                renderScheduleView();
+                renderStandingsView();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                showToast('Lỗi tải dữ liệu: ' + error.message, 'error');
+            }
+        }
+
+        // =====================================================================
+        // VIEW SWITCHING
+        // =====================================================================
+        window.switchView = function(view) {
+            const scheduleView = document.getElementById('schedule-view');
+            const standingsView = document.getElementById('standings-view');
+            const scheduleBtn = document.getElementById('btn-schedule');
+            const standingsBtn = document.getElementById('btn-standings');
+
+            if (view === 'schedule') {
+                scheduleView.classList.remove('hidden');
+                standingsView.classList.add('hidden');
+                scheduleBtn.classList.add('active:bg-white/30');
+                standingsBtn.classList.remove('active:bg-white/30');
+            } else {
+                scheduleView.classList.add('hidden');
+                standingsView.classList.remove('hidden');
+                standingsBtn.classList.add('active:bg-white/30');
+                scheduleBtn.classList.remove('active:bg-white/30');
+            }
+        }
+
+        // =====================================================================
+        // RENDER FUNCTIONS
+        // =====================================================================
+        function renderRoundTabs() {
+            const container = document.getElementById('round-tabs-container');
+            let html = '';
+
+            for (let round = 1; round <= 5; round++) {
+                const isActive = round === currentRound;
+                html += `
+                    <button
+                        onclick="switchRound(${round})"
+                        class="px-6 py-3 rounded-lg font-bold whitespace-nowrap transition ${
+                            isActive
+                                ? 'bg-blue-600 text-white'
+                                : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
+                        }">
+                        Lượt ${round}
+                    </button>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        window.switchRound = function(round) {
+            currentRound = round;
+            renderRoundTabs();
+            renderScheduleView();
+        }
+
+        async function renderScheduleView() {
+            const container = document.getElementById('matches-container');
+            const roundMatches = matchesData.filter(m => m.round === currentRound);
+
+            if (roundMatches.length === 0) {
+                container.innerHTML = '<p class="text-slate-600 text-center py-8">Không có dữ liệu</p>';
+                return;
+            }
+
+            let html = '';
+
+            for (const match of roundMatches) {
+                const teamA = TEAMS_DATA.find(t => t.id === match.team_a_id);
+                const teamB = TEAMS_DATA.find(t => t.id === match.team_b_id);
+
+                // Get games for this match
+                const { data: games } = await supabase
+                    .from('games')
+                    .select('*')
+                    .eq('match_id', match.match_id)
+                    .order('game_number', { ascending: true });
+
+                const gamesHtml = (games || []).map(game => `
+                    <div class="flex items-center justify-between py-3 px-4 bg-slate-50 rounded-lg">
+                        <div class="flex-1">
+                            <div class="text-xs font-bold text-slate-500 uppercase mb-1">
+                                ${GAME_TYPES[game.game_type]}
+                            </div>
+                            <div class="text-sm text-slate-600">Game ${game.game_number}</div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="text-right min-w-20">
+                                <div class="text-2xl font-bold text-slate-800">${game.team_a_score || '-'}</div>
+                                <div class="text-xs text-slate-500">${teamA.name}</div>
+                            </div>
+                            <div class="text-center text-xl text-slate-400">:</div>
+                            <div class="text-left min-w-20">
+                                <div class="text-2xl font-bold text-slate-800">${game.team_b_score || '-'}</div>
+                                <div class="text-xs text-slate-500">${teamB.name}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                html += `
+                    <div class="match-card bg-white rounded-2xl shadow-md border-l-4 border-blue-500 overflow-hidden">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="flex-1">
+                                        <div class="text-sm font-bold text-slate-500 uppercase mb-1">Team A</div>
+                                        <div class="text-xl font-bold text-slate-800">${teamA.name}</div>
+                                    </div>
+                                    <div class="text-3xl font-bold text-slate-400">vs</div>
+                                    <div class="flex-1 text-right">
+                                        <div class="text-sm font-bold text-slate-500 uppercase mb-1">Team B</div>
+                                        <div class="text-xl font-bold text-slate-800">${teamB.name}</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs text-slate-500 mb-2">Trạng thái</div>
+                                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold ${
+                                        match.status === 'completed' ? 'bg-green-100 text-green-700' :
+                                        match.status === 'in_progress' ? 'bg-yellow-100 text-yellow-700' :
+                                        'bg-slate-100 text-slate-700'
+                                    }">
+                                        ${match.status === 'completed' ? 'Hoàn thành' :
+                                          match.status === 'in_progress' ? 'Đang diễn ra' : 'Chưa bắt đầu'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2 mb-6">
+                                ${gamesHtml}
+                            </div>
+
+                            <div class="flex items-center justify-between pt-4 border-t border-slate-200">
+                                <div class="text-sm text-slate-600">
+                                    ${match.team_a_wins || 0} - ${match.team_b_wins || 0}
+                                </div>
+                                <button
+                                    onclick="openScoreModal('${match.match_id}')"
+                                    class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold transition text-sm flex items-center gap-2">
+                                    <i class="fas fa-edit"></i>
+                                    Cập Nhật Tỷ Số
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        async function renderStandingsView() {
+            const tbodyElement = document.getElementById('standings-tbody');
+            const statsContainer = document.getElementById('stats-container');
+
+            // Fetch latest standings
+            const { data: standings } = await supabase
+                .from('standings')
+                .select('*')
+                .order('rank', { ascending: true });
+
+            let tbody = '';
+            let totalMatches = 0;
+
+            standings.forEach((stand, idx) => {
+                const team = TEAMS_DATA.find(t => t.id === stand.team_id);
+                const rank = idx + 1;
+
+                tbody += `
+                    <tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+                        <td class="px-6 py-4">
+                            <div class="rank-badge rank-${rank <= 3 ? rank : 'other'}" style="${rank > 3 ? 'background: #e2e8f0; color: #475569;' : ''}">
+                                ${rank}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 font-bold text-slate-800">${team.name}</td>
+                        <td class="px-6 py-4 text-center font-bold">${stand.matches_won || 0}</td>
+                        <td class="px-6 py-4 text-center">${stand.games_won || 0} - ${stand.games_lost || 0}</td>
+                        <td class="px-6 py-4 text-center font-bold text-slate-600">
+                            ${(stand.points_for || 0) - (stand.points_against || 0)}
+                        </td>
+                    </tr>
+                `;
+
+                totalMatches += (stand.matches_won || 0);
+            });
+
+            tbodyElement.innerHTML = tbody;
+
+            // Stats cards
+            const totalGames = standings.reduce((sum, s) => sum + (s.games_won || 0), 0);
+            const completedMatches = matchesData.filter(m => m.status === 'completed').length;
+            const totalPossibleMatches = matchesData.length;
+
+            statsContainer.innerHTML = `
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
+                    <div class="text-2xl font-bold text-blue-700">${completedMatches}</div>
+                    <div class="text-xs text-blue-600 font-bold mt-1">Trận Đã Hoàn Thành</div>
+                </div>
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-4 border border-emerald-200">
+                    <div class="text-2xl font-bold text-emerald-700">${totalPossibleMatches}</div>
+                    <div class="text-xs text-emerald-600 font-bold mt-1">Tổng Trận Đấu</div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 border border-orange-200">
+                    <div class="text-2xl font-bold text-orange-700">${totalGames}</div>
+                    <div class="text-xs text-orange-600 font-bold mt-1">Tổng Game Đã Chơi</div>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4 border border-pink-200">
+                    <div class="text-2xl font-bold text-pink-700">${Math.round((completedMatches / totalPossibleMatches) * 100)}%</div>
+                    <div class="text-xs text-pink-600 font-bold mt-1">Tiến Độ</div>
+                </div>
+            `;
+        }
+
+        // =====================================================================
+        // SCORE MODAL MANAGEMENT
+        // =====================================================================
+        async function openScoreModal(matchId) {
+            currentMatchId = matchId;
+            const match = matchesData.find(m => m.match_id === matchId);
+            const teamA = TEAMS_DATA.find(t => t.id === match.team_a_id);
+            const teamB = TEAMS_DATA.find(t => t.id === match.team_b_id);
+
+            // Fetch games
+            const { data: games } = await supabase
+                .from('games')
+                .select('*')
+                .eq('match_id', matchId)
+                .order('game_number', { ascending: true });
+
+            gamesForUpdate = games || [];
+
+            // Build modal content
+            const title = document.getElementById('modal-title');
+            title.textContent = `${teamA.name} vs ${teamB.name}`;
+
+            const content = document.getElementById('modal-content');
+            let html = '';
+
+            games.forEach(game => {
+                html += `
+                    <div class="mb-6 pb-6 border-b border-slate-200">
+                        <div class="mb-4">
+                            <h3 class="text-lg font-bold text-slate-800 mb-2">
+                                ${GAME_TYPES[game.game_type]}
+                            </h3>
+                            <p class="text-sm text-slate-500">Game ${game.game_number}</p>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="flex-1">
+                                <label class="block text-xs font-bold text-slate-600 mb-2">${teamA.name}</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value="${game.team_a_score || 0}"
+                                    data-game-id="${game.game_id}"
+                                    data-team="a"
+                                    class="score-input border-2 border-slate-300 rounded-lg p-2 w-full"
+                                    placeholder="0">
+                            </div>
+
+                            <div class="text-center text-2xl font-bold text-slate-400">:</div>
+
+                            <div class="flex-1">
+                                <label class="block text-xs font-bold text-slate-600 mb-2">${teamB.name}</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value="${game.team_b_score || 0}"
+                                    data-game-id="${game.game_id}"
+                                    data-team="b"
+                                    class="score-input border-2 border-slate-300 rounded-lg p-2 w-full"
+                                    placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = html;
+            document.getElementById('score-modal').classList.remove('hidden');
+        }
+
+        function closeScoreModal() {
+            document.getElementById('score-modal').classList.add('hidden');
+            gamesForUpdate = [];
+        }
+
+        async function saveScores() {
+            const saveBtn = document.getElementById('save-btn-text');
+            const loadingSpinner = document.getElementById('save-loading');
+
+            try {
+                saveBtn.textContent = 'Đang lưu...';
+                loadingSpinner.classList.remove('hidden');
+
+                const inputs = document.querySelectorAll('.score-input');
+                const updates = [];
+
+                for (const input of inputs) {
+                    const gameId = input.getAttribute('data-game-id');
+                    const team = input.getAttribute('data-team');
+                    const score = parseInt(input.value) || 0;
+
+                    const game = gamesForUpdate.find(g => g.game_id === gameId);
+                    if (!game) continue;
+
+                    const updateData = team === 'a'
+                        ? { ...game, team_a_score: score }
+                        : { ...game, team_b_score: score };
+
+                    updates.push(updateData);
+                }
+
+                // Update all games
+                for (const update of updates) {
+                    const { error } = await supabase
+                        .from('games')
+                        .update({
+                            team_a_score: update.team_a_score,
+                            team_b_score: update.team_b_score,
+                            status: 'completed'
+                        })
+                        .eq('game_id', update.game_id);
+
+                    if (error) throw error;
+                }
+
+                // Calculate match results and update standings
+                await calculateMatchResults();
+
+                showToast('Lưu tỷ số thành công!', 'success');
+                closeScoreModal();
+                loadTournamentData();
+
+            } catch (error) {
+                console.error('Error saving scores:', error);
+                showToast('Lỗi lưu tỷ số: ' + error.message, 'error');
+            } finally {
+                saveBtn.textContent = 'Lưu Tỷ Số';
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        async function calculateMatchResults() {
+            // Get all games and update match records + standings
+            const { data: allGames } = await supabase
+                .from('games')
+                .select('*');
+
+            const { data: allMatches } = await supabase
+                .from('matches')
+                .select('*');
+
+            // Group games by match and calculate wins
+            for (const match of allMatches) {
+                const matchGames = allGames.filter(g => g.match_id === match.match_id);
+
+                if (matchGames.length > 0) {
+                    let teamAWins = 0;
+                    let teamBWins = 0;
+
+                    for (const game of matchGames) {
+                        if (game.team_a_score > game.team_b_score) teamAWins++;
+                        else if (game.team_b_score > game.team_a_score) teamBWins++;
+                    }
+
+                    const matchStatus = matchGames.every(g => g.team_a_score !== null && g.team_b_score !== null)
+                        ? 'completed'
+                        : 'in_progress';
+
+                    await supabase
+                        .from('matches')
+                        .update({
+                            team_a_wins: teamAWins,
+                            team_b_wins: teamBWins,
+                            status: matchStatus
+                        })
+                        .eq('match_id', match.match_id);
+
+                    // Update standings
+                    if (matchStatus === 'completed') {
+                        const teamAId = match.team_a_id;
+                        const teamBId = match.team_b_id;
+
+                        // Get current standings
+                        const { data: standA } = await supabase
+                            .from('standings')
+                            .select('*')
+                            .eq('team_id', teamAId)
+                            .maybeSingle();
+
+                        const { data: standB } = await supabase
+                            .from('standings')
+                            .select('*')
+                            .eq('team_id', teamBId)
+                            .maybeSingle();
+
+                        const teamAPoints = matchGames.reduce((sum, g) => sum + (g.team_a_score || 0), 0);
+                        const teamBPoints = matchGames.reduce((sum, g) => sum + (g.team_b_score || 0), 0);
+
+                        // Update team A standings
+                        await supabase
+                            .from('standings')
+                            .update({
+                                matches_won: (standA?.matches_won || 0) + (teamAWins > teamBWins ? 1 : 0),
+                                matches_lost: (standA?.matches_lost || 0) + (teamBWins > teamAWins ? 1 : 0),
+                                games_won: (standA?.games_won || 0) + teamAWins,
+                                games_lost: (standA?.games_lost || 0) + teamBWins,
+                                points_for: (standA?.points_for || 0) + teamAPoints,
+                                points_against: (standA?.points_against || 0) + teamBPoints
+                            })
+                            .eq('team_id', teamAId);
+
+                        // Update team B standings
+                        await supabase
+                            .from('standings')
+                            .update({
+                                matches_won: (standB?.matches_won || 0) + (teamBWins > teamAWins ? 1 : 0),
+                                matches_lost: (standB?.matches_lost || 0) + (teamAWins > teamBWins ? 1 : 0),
+                                games_won: (standB?.games_won || 0) + teamBWins,
+                                games_lost: (standB?.games_lost || 0) + teamAWins,
+                                points_for: (standB?.points_for || 0) + teamBPoints,
+                                points_against: (standB?.points_against || 0) + teamAPoints
+                            })
+                            .eq('team_id', teamBId);
+                    }
+                }
+            }
+
+            // Update ranking
+            const { data: allStandings } = await supabase
+                .from('standings')
+                .select('*');
+
+            const sorted = allStandings.sort((a, b) => {
+                if ((b.matches_won || 0) !== (a.matches_won || 0)) {
+                    return (b.matches_won || 0) - (a.matches_won || 0);
+                }
+                const diffA = (a.games_won || 0) - (a.games_lost || 0);
+                const diffB = (b.games_won || 0) - (b.games_lost || 0);
+                if (diffB !== diffA) return diffB - diffA;
+                return ((b.points_for || 0) - (b.points_against || 0)) - ((a.points_for || 0) - (a.points_against || 0));
+            });
+
+            for (let i = 0; i < sorted.length; i++) {
+                await supabase
+                    .from('standings')
+                    .update({ rank: i + 1 })
+                    .eq('team_id', sorted[i].team_id);
+            }
+        }
+
+        // =====================================================================
+        // UTILITIES
+        // =====================================================================
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-${
+                        type === 'success' ? 'check-circle text-green-600' :
+                        type === 'error' ? 'exclamation-circle text-red-600' :
+                        'info-circle text-blue-600'
+                    }"></i>
+                    <span class="text-slate-800">${message}</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
