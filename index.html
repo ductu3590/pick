@@ -3,368 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Điều lệ: Giải Pickleball các CLB Hana 2025</title>
+    <title>HANA PICKLEBALL - END YEAR CUP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-            background-color: #f0f4f8;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-        /* Removed flowchart-arrow specific styles as it's replaced by grid layout */
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: -10px;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #FFA600;
-            border: 4px solid #f0f4f8;
-        }
-        .content-selector {
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .content-selector:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .content-selector.active {
-            background-color: #366682;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        
+        /* Custom Colors based on Team Color Logic */
+        .text-red-team { color: #ef4444; } /* Đỏ */
+        .text-blue-team { color: #3b82f6; } /* Xanh */
+        .bg-red-team { background-color: #fef2f2; border-color: #fecaca; }
+        .bg-blue-team { background-color: #eff6ff; border-color: #bfdbfe; }
+        
+        .bg-pickleball { background: linear-gradient(135deg, #0f172a 0%, #1e40af 100%); }
+        
+        .team-card { transition: all 0.3s ease; }
+        .team-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+        
+        .tab-btn.active { background-color: #2563eb; color: white; border-color: #2563eb; }
+        .match-card { transition: all 0.2s; border-left-width: 4px; }
+        .match-card:hover { background-color: #f8fafc; }
+        
+        /* Animation */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        
+        /* Message Scroll Animation (Optional style for message) */
+        .marquee-container { overflow: hidden; white-space: nowrap; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-slate-100 min-h-screen text-slate-800">
 
-    <div class="container mx-auto p-4 md:p-8">
-
-        <header class="text-center mb-12">
-            <h1 class="text-5xl md:text-7xl font-black text-[#003F5C] uppercase tracking-wider mb-2">ĐIỀU LỆ</h1>
-            <h2 class="text-4xl md:text-6xl font-black text-[#003F5C] tracking-wider">Giải Pickleball các CLB Hana</h2>
-            <p class="text-2xl md:text-3xl font-bold text-[#366682] mt-2">Diễn ra trong 2 ngày 19 & 20 Tháng 7, 2025</p>
-            <p class="text-lg text-gray-600 mt-2">Tại Sân Pickleball Hana, 35 Lê Trực, phường Yên Bái, tỉnh Lào Cai</p>
-        </header>
-
-        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Mục Đích & Yêu Cầu Giải Đấu</h2>
-                <p class="text-gray-700 mb-4">Giải đấu được tổ chức với các mục đích và yêu cầu rõ ràng nhằm đảm bảo một sự kiện thể thao thành công và ý nghĩa:</p>
-                <h3 class="text-xl font-semibold text-[#366682] mb-2">Mục đích:</h3>
-                <ul class="list-disc list-inside text-gray-700 mb-4">
-                    <li>Tạo sân chơi giao lưu, học hỏi kinh nghiệm giữa các vận động viên (VĐV) và CLB Pickleball sinh hoạt tại sân Pickleball HANA.</li>
-                    <li>Nâng cao trình độ chuyên môn, gắn kết cộng đồng yêu Pickleball.</li>
-                </ul>
-                <h3 class="text-xl font-semibold text-[#366682] mb-2">Yêu cầu:</h3>
-                <ul class="list-disc list-inside text-gray-700">
-                    <li>Giải đấu diễn ra <strong>công bằng, trung thực, đoàn kết</strong> và <strong>an toàn</strong>.</li>
-                    <li>Các VĐV chấp hành <strong>nghiêm túc điều lệ</strong> và các quy định của Ban Tổ chức (BTC).</li>
-                </ul>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
-                <span class="text-6xl font-black text-[#FFA600]">4</span>
-                <p class="text-xl font-bold text-[#003F5C] mt-2">Nội dung thi đấu</p>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
-                <span class="text-6xl font-black text-[#FFA600]">2</span>
-                <p class="text-xl font-bold text-[#003F5C] mt-2">Ngày tranh tài</p>
-            </div>
-
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-6">Thể Thức Bốc Thăm Độc Đáo</h2>
-                <p class="text-gray-700 text-center mb-6">Để tăng tính bất ngờ và cơ hội giao lưu, giải đấu áp dụng thể thức <strong>bốc thăm ngẫu nhiên</strong> cho các cặp đôi.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm w-full max-w-[250px]">
-                        <div class="text-5xl font-black text-[#FFA600] mb-2">1</div>
-                        <h3 class="text-lg font-bold text-[#366682] mb-1">Đăng ký Nội dung</h3>
-                        <p class="text-sm text-gray-600">VĐV chọn nội dung thi đấu phù hợp.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm w-full max-w-[250px]">
-                        <div class="text-5xl font-black text-[#FFA600] mb-2">2</div>
-                        <h3 class="text-lg font-bold text-[#366682] mb-1">Bốc thăm Ngẫu nhiên</h3>
-                        <p class="text-sm text-gray-600">BTC bốc thăm để ghép cặp ngẫu nhiên.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-sm w-full max-w-[250px]">
-                        <div class="text-5xl font-black text-[#FFA600] mb-2">3</div>
-                        <h3 class="text-lg font-bold text-[#366682] mb-1">Tìm Đồng đội Mới</h3>
-                        <p class="text-sm text-gray-600">Thi đấu cùng đồng đội được chỉ định.</p>
-                    </div>
+    <!-- Header -->
+    <header class="bg-pickleball text-white shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 md:mb-0">
+                <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-blue-900 font-bold text-xl shadow-lg border-2 border-white">
+                    <i class="fas fa-trophy"></i>
                 </div>
-                <p class="text-center text-sm text-gray-500 mt-6">Thể thức này tạo ra những cặp đấu <strong>bất ngờ</strong> và đề cao tinh thần <strong>giao lưu, kết nối</strong>.</p>
+                <div>
+                    <h1 class="text-xl font-black uppercase tracking-wider text-yellow-300">HANA PICKLEBALL</h1>
+                    <p class="text-[10px] text-white font-bold tracking-[0.2em] opacity-90">END YEAR CUP</p>
+                </div>
+            </div>
+            <nav class="flex space-x-2 bg-white/10 p-1 rounded-lg backdrop-blur-sm">
+                <button onclick="scrollToSection('teams')" class="px-3 py-1.5 rounded text-xs md:text-sm font-bold hover:bg-white/20 transition flex items-center"><i class="fas fa-users mr-2"></i>Đội</button>
+                <button onclick="scrollToSection('schedule')" class="px-3 py-1.5 rounded text-xs md:text-sm font-bold hover:bg-white/20 transition flex items-center"><i class="fas fa-calendar-alt mr-2"></i>Lịch</button>
+                <button onclick="scrollToSection('rules')" class="px-3 py-1.5 rounded text-xs md:text-sm font-bold hover:bg-white/20 transition flex items-center"><i class="fas fa-book mr-2"></i>Luật</button>
+            </nav>
+        </div>
+        
+        <!-- MESSAGE BANNER -->
+        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs md:text-sm py-2 px-4 shadow-inner">
+            <div class="container mx-auto flex items-center justify-center text-center">
+                <i class="fas fa-glass-cheers mr-2 animate-bounce"></i>
+                <p class="font-medium leading-tight">
+                    Giải đấu mang tính chất giao lưu, tạo câu chuyện cho tiệc tổng kết cuối năm của CLB. 
+                    Mọi sắp xếp chưa hợp lý của BTC mong anh chị em trong CLB vui vẻ bỏ qua, tham gia giải đấu với tinh thần 
+                    <span class="font-black underline text-blue-900">VUI LÀ CHÍNH</span>
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 space-y-12">
+
+        <!-- SECTION 1: TEAMS -->
+        <section id="teams" class="animate-fade-in">
+            <div class="flex justify-between items-end mb-6 border-b pb-2 border-slate-200">
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-8 bg-blue-600 rounded"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Danh Sách Đội</h2>
+                </div>
+                <div class="flex space-x-4 text-xs font-bold uppercase tracking-wide">
+                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>VĐV Đỏ</div>
+                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>VĐV Xanh</div>
+                </div>
+            </div>
+
+            <div id="teams-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript will render teams here -->
+            </div>
+        </section>
+
+        <!-- SECTION 2: SCHEDULE -->
+        <section id="schedule" class="animate-fade-in" style="animation-delay: 0.1s;">
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <div class="w-2 h-8 bg-green-500 rounded"></div>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Lịch Thi Đấu</h2>
             </div>
             
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Nội Dung & Đối Tượng Tham Gia</h2>
-                <p class="text-gray-700 mb-4 text-center">Giải đấu dành cho các VĐV thuộc các CLB sinh hoạt tại sân Pickleball Hana, với 4 nội dung thi đấu. Hãy nhấp vào từng nội dung để xem chi tiết:</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div id="doiNamBtn" class="content-selector bg-gray-100 p-4 rounded-lg text-center font-semibold text-[#003F5C] hover:bg-gray-200">
-                        Đôi Nam
-                    </div>
-                    <div id="doiNuBtn" class="content-selector bg-gray-100 p-4 rounded-lg text-center font-semibold text-[#003F5C] hover:bg-gray-200">
-                        Đôi Nữ
-                    </div>
-                    <div id="doiNamNuBtn" class="content-selector bg-gray-100 p-4 rounded-lg text-center font-semibold text-[#003F5C] hover:bg-gray-200">
-                        Đôi Nam Nữ
-                    </div>
+            <!-- TIME BANNER -->
+            <div class="mb-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-xl p-4 shadow-lg flex items-center justify-center space-x-3 animate-fade-in border border-blue-400">
+                <div class="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
+                    <i class="fas fa-clock text-2xl md:text-3xl text-yellow-300"></i>
                 </div>
-                <div id="contentDescription" class="bg-gray-50 p-6 rounded-lg shadow-inner text-gray-800 transition-all duration-300 ease-in-out">
-                    <p class="text-center italic text-gray-600">Chọn một nội dung thi đấu để xem chi tiết.</p>
+                <div class="text-center md:text-left">
+                    <p class="text-[10px] md:text-xs uppercase tracking-widest font-bold opacity-80 text-blue-100">Thời gian khởi tranh</p>
+                    <p class="text-lg md:text-2xl font-black tracking-tight">14h00 - Ngày 28/12/2025 (Chủ Nhật)</p>
                 </div>
             </div>
 
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Thể Thức Thi Đấu & Luật Thi Đấu</h2>
-                <p class="text-gray-700 mb-4">Các trận đấu sẽ được diễn ra theo luật quốc tế, đảm bảo tính chuyên nghiệp và công bằng:</p>
-                <h3 class="text-xl font-semibold text-[#366682] mb-2">Thể thức bốc thăm và ghép cặp:</h3>
-                <ul class="list-disc list-inside text-gray-700 mb-4">
-                    <li>VĐV đăng ký tham gia nội dung cụ thể (<strong>Đôi Nam Phong trào/Open, Đôi Nữ, Đôi Nam Nữ</strong>).</li>
-                    <li>Sau khi chốt danh sách đăng ký, BTC sẽ tiến hành <strong>bốc thăm bắt cặp ngẫu nhiên</strong> cho tất cả các VĐV trong cùng một nội dung (không bốc theo CLB).</li>
-                </ul>
-                <h3 class="text-xl font-semibold text-[#366682] mb-2">Thể thức thi đấu:</h3>
-                <ul class="list-disc list-inside text-gray-700 mb-4">
-                    <li>Thể thức thi đấu cụ thể (<strong>chia bảng vòng tròn tính điểm, đấu loại trực tiếp</strong>,...) sẽ được BTC công bố chi tiết sau khi có số lượng VĐV đăng ký chính thức cho từng nội dung.</li>
-                    <li>Các trận đấu sẽ thi đấu đến <strong>điểm 11, cách 2 điểm</strong> (hoặc đến <strong>điểm 15, cách 2 điểm</strong> tùy theo số lượng VĐV và thời gian cho phép).</li>
-                    <li>BTC sẽ thông báo cụ thể về <strong>số trận đấu</strong> và <strong>cách tính điểm chi tiết</strong> trước ngày thi đấu.</li>
-                </ul>
-                <h3 class="text-xl font-semibold text-[#366682] mb-2">Luật thi đấu:</h3>
-                <ul class="list-disc list-inside text-gray-700 mb-4">
-                    <li>Áp dụng <strong>Luật Pickleball Quốc tế (IFP)</strong> hiện hành.</li>
-                    <li>BTC có quyền đưa ra các điều chỉnh nhỏ cho phù hợp với điều kiện thực tế của giải, và sẽ thông báo công khai trước giải đấu.</li>
-                </ul>
-                <h3 class="text-xl font-semibold text-[#366682] mb-2">Bóng thi đấu:</h3>
-                <p class="text-gray-700">Sử dụng <strong>bóng của Nhà Tài trợ</strong> chính thức của giải (công bố sau).</p>
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden">
+                <!-- Tab Navigation -->
+                <div class="flex overflow-x-auto bg-slate-50 border-b p-2 space-x-2" id="round-tabs">
+                    <!-- JS will render tabs -->
+                </div>
+
+                <!-- Matches Content -->
+                <div id="matches-container" class="p-6 bg-white min-h-[300px]">
+                    <!-- JS will render matches -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: RULES -->
+        <section id="rules" class="animate-fade-in" style="animation-delay: 0.2s;">
+            <div class="flex items-center space-x-3 mb-6 border-b pb-2 border-slate-200">
+                <div class="w-2 h-8 bg-yellow-500 rounded"></div>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Thể Thức MLP</h2>
             </div>
 
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Cơ Cấu Kinh Phí</h2>
-                <p class="text-center text-gray-600 mb-6">Giải đấu được xây dựng từ sự chung tay của nhà tài trợ và cộng đồng, đảm bảo nguồn lực cho việc tổ chức chuyên nghiệp.</p>
-                <div class="chart-container">
-                    <canvas id="fundingChart"></canvas>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-blue-100"></div>
+                    <i class="fas fa-list-ol text-4xl text-blue-500 mb-4 relative z-10"></i>
+                    <h3 class="font-bold text-xl mb-2 relative z-10">4 Game Chính</h3>
+                    <ul class="text-sm text-slate-600 space-y-2 relative z-10">
+                        <li class="flex items-center"><i class="fas fa-tshirt text-blue-500 mr-2 w-5 text-center"></i>Game 1: Đôi Xanh</li>
+                        <li class="flex items-center"><i class="fas fa-tshirt text-red-500 mr-2 w-5 text-center"></i>Game 2: Đôi Đỏ</li>
+                        <li class="flex items-center"><i class="fas fa-users text-purple-500 mr-2 w-5 text-center"></i>Game 3: Đôi Phối Hợp 1</li>
+                        <li class="flex items-center"><i class="fas fa-users text-purple-500 mr-2 w-5 text-center"></i>Game 4: Đôi Phối Hợp 2</li>
+                    </ul>
                 </div>
-                <p class="text-center text-gray-700 mt-4 text-sm">Chủ sân Hana tài trợ <strong>10.000.000 VNĐ</strong>. Phần còn lại do VĐV đóng góp.</p>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-green-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-green-100"></div>
+                    <i class="fas fa-stopwatch text-4xl text-green-500 mb-4 relative z-10"></i>
+                    <h3 class="font-bold text-xl mb-2 relative z-10">Tính Điểm Rally</h3>
+                    <ul class="text-sm text-slate-600 space-y-2 relative z-10">
+                        <li class="flex items-center"><i class="fas fa-bolt text-yellow-500 mr-2"></i>Chạm 15 điểm (Bóng chết ăn điểm)</li>
+                        <li class="flex items-center"><i class="fas fa-skull text-red-400 mr-2"></i>Sudden Death tại điểm 15</li>
+                        <li class="flex items-center"><i class="fas fa-sync text-blue-400 mr-2"></i>Đổi sân khi đạt 8 điểm</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-yellow-50 rounded-bl-full -mr-4 -mt-4 transition group-hover:bg-yellow-100"></div>
+                    <i class="fas fa-fire text-4xl text-yellow-500 mb-4 relative z-10"></i>
+                    <h3 class="font-bold text-xl mb-2 relative z-10">DreamBreaker (2-2)</h3>
+                    <p class="text-sm text-slate-600 mb-3 relative z-10">Khi tỷ số hòa 2-2, loạt "Penalty" đánh đơn sẽ diễn ra!</p>
+                    <div class="bg-yellow-50 text-yellow-800 text-xs font-bold p-2 rounded relative z-10">
+                        Chạm 21 điểm - Xoay vòng 4 người (Mỗi người 4 điểm)
+                    </div>
+                </div>
             </div>
             
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-8">Lịch Trình Giải Đấu</h2>
-                <p class="text-gray-700 text-center mb-4">Giải đấu sẽ diễn ra trong <strong>2 ngày</strong> với lịch trình chi tiết như sau:</p>
-                <div class="relative pl-8 border-l-4 border-[#366682]">
-                    <div class="timeline-item mb-12">
-                        <h3 class="text-xl font-bold text-[#003F5C]">Ngày 1: 19/07/2025</h3>
-                        <p class="text-gray-700">Khai mạc & Vòng loại</p>
-                        <p class="text-sm text-gray-500">Các trận đấu vòng bảng của tất cả các nội dung sẽ diễn ra sôi nổi để tìm ra những cặp đấu xuất sắc nhất.</p>
-                    </div>
-                    <div class="timeline-item">
-                        <h3 class="text-xl font-bold text-[#003F5C]">Ngày 2: 20/07/2025</h3>
-                        <p class="text-gray-700">Chung kết & Trao giải</p>
-                        <p class="text-sm text-gray-500">Các trận đấu chung kết hấp dẫn, tìm ra nhà vô địch và Lễ bế mạc, trao giải thưởng.</p>
-                    </div>
+            <div class="mt-6 p-4 rounded-lg bg-red-50 border border-red-100 flex items-start space-x-3">
+                <i class="fas fa-exclamation-triangle text-red-500 mt-1"></i>
+                <div class="text-sm text-red-800">
+                    <span class="font-bold">Quy tắc thay người (Dành cho Team 5 người):</span>
+                    VĐV Dự bị chỉ được phép thay thế cho đồng đội <span class="uppercase font-bold underline">CÙNG MÀU ÁO</span> (Đỏ thay Đỏ, Xanh thay Xanh). Việc thay người phải thông báo trước khi Game đấu bắt đầu.
                 </div>
             </div>
 
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6 text-center">
-                <h2 class="text-2xl font-bold text-[#003F5C] mb-6">Giải Thưởng Hấp Dẫn</h2>
-                <p class="text-gray-700 mb-4">Cơ cấu giải thưởng sẽ được BTC công bố chi tiết, hứa hẹn những phần quà <strong>xứng đáng</strong> cho các VĐV xuất sắc.</p>
-                <div class="flex flex-col md:flex-row justify-center items-center gap-8">
-                    <div class="flex flex-col items-center">
-                        <span class="text-6xl">🏆</span>
-                        <p class="text-lg font-semibold mt-2">Cúp Vô Địch</p>
+            <!-- GÓC KIẾN THỨC BỔ SUNG -->
+            <div class="mt-8 grid md:grid-cols-2 gap-6">
+                <!-- Card Explain Round Robin -->
+                <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-100 relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-indigo-100 opacity-50">
+                        <i class="fas fa-recycle text-9xl"></i>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <span class="text-6xl">🥇</span>
-                        <p class="text-lg font-semibold mt-2">Huy Chương</p>
+                    <h3 class="font-bold text-lg text-indigo-900 mb-3 flex items-center relative z-10">
+                        <i class="fas fa-recycle mr-2"></i> Vòng Tròn Tính Điểm
+                    </h3>
+                    <p class="text-sm text-indigo-800 mb-3 relative z-10 text-justify">
+                        Khác với đấu loại trực tiếp (thua là về), thể thức vòng tròn đảm bảo mỗi đội đều được thi đấu đủ <strong>4 lượt trận</strong> với tất cả các đội còn lại. Điều này giúp tối đa hóa thời gian chơi và giao lưu.
+                    </p>
+                    <div class="bg-white/80 p-3 rounded-lg text-xs font-medium text-slate-600 shadow-sm relative z-10 backdrop-blur-sm border border-indigo-200">
+                        <span class="block mb-1 font-bold text-indigo-600 uppercase">Thứ tự xếp hạng vô địch:</span>
+                        <ol class="list-decimal pl-4 space-y-1">
+                            <li><strong>Số Trận Thắng (Match Wins):</strong> Đội thắng nhiều lượt trận nhất.</li>
+                            <li><strong>Hiệu Số Game:</strong> Tổng số Game Thắng trừ đi Tổng số Game Thua.</li>
+                            <li><strong>Hiệu Số Điểm:</strong> Tổng điểm ghi được trừ đi Tổng điểm bị ghi.</li>
+                        </ol>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <span class="text-6xl">🎁</span>
-                        <p class="text-lg font-semibold mt-2">Quà của Nhà tài trợ</p>
+                </div>
+            
+                <!-- Card Explain MLP Spirit -->
+                <div class="bg-orange-50 rounded-xl p-6 border border-orange-100 relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-orange-100 opacity-50">
+                        <i class="fas fa-handshake text-9xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-orange-900 mb-3 flex items-center relative z-10">
+                        <i class="fas fa-handshake mr-2"></i> Tinh Thần MLP
+                    </h3>
+                    <p class="text-sm text-orange-800 mb-3 relative z-10 text-justify">
+                        <strong>MLP (Major League Pickleball)</strong> là thể thức đề cao sức mạnh tập thể. Không một cá nhân nào có thể "gánh team" mãi, mà chiến thắng đến từ sự phân phối sức hợp lý và chiến thuật ghép cặp thông minh.
+                    </p>
+                    <div class="bg-white/80 p-3 rounded-lg text-xs text-orange-800 shadow-sm relative z-10 backdrop-blur-sm border border-orange-200">
+                        <span class="font-bold block mb-1">🔥 Điểm nhấn: DreamBreaker</span>
+                        Đây là vòng đấu kịch tính nhất! Khi tỷ số là 2-2, cả đội sẽ phải cùng ra sân thi đấu đơn (Singles). Áp lực tâm lý rất lớn, và sự cổ vũ của đồng đội chính là "vũ khí" quan trọng nhất để giành chiến thắng.
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="md:col-span-2 bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-center text-[#003F5C] mb-4">Các Quy Định Khác</h2>
-                <p class="text-gray-700 mb-4">Để đảm bảo giải đấu diễn ra suôn sẻ và công bằng, các VĐV cần lưu ý những quy định sau:</p>
-                <ul class="list-disc list-inside text-gray-700 mb-4">
-                    <li><strong>Trang phục:</strong> VĐV tham gia thi đấu phải mặc trang phục thể thao lịch sự, phù hợp với môn Pickleball.</li>
-                    <li><strong>Trọng tài:</strong> Trọng tài điều hành trận đấu có quyền quyết định cuối cùng trong mọi tình huống. Các VĐV phải tuân thủ quyết định của trọng tài.</li>
-                    <li><strong>Khiếu nại:</strong> Mọi khiếu nại phải được gửi bằng văn bản đến BTC trong vòng <strong>15 phút</strong> sau khi trận đấu kết thúc. BTC sẽ xem xét và đưa ra quyết định cuối cùng.</li>
-                    <li><strong>An toàn:</strong> VĐV tự chịu trách nhiệm về sức khỏe của bản thân trong suốt quá trình tham gia giải. BTC sẽ có bộ phận y tế hỗ trợ sơ cứu ban đầu.</li>
-                    <li><strong>Quyền của BTC:</strong> BTC có quyền thay đổi, bổ sung điều lệ giải đấu nếu thấy cần thiết để đảm bảo sự thành công của giải, và sẽ thông báo công khai tới các VĐV.</li>
-                </ul>
-            </div>
+    </main>
+    
+    <footer class="bg-slate-900 text-slate-400 py-10 text-center">
+        <div class="mb-4">
+            <i class="fas fa-table-tennis text-3xl text-slate-600"></i>
+        </div>
+        <p class="font-medium text-sm">HANA PICKLEBALL CLUB</p>
+        <p class="text-xs mt-2 opacity-50">&copy; 2024 End Year Cup</p>
+    </footer>
 
-            <div class="md:col-span-2 bg-[#003F5C] text-white rounded-lg shadow-lg p-8 text-center">
-                <h2 class="text-3xl font-black">SẴN SÀNG THAM GIA?</h2>
-                <p class="mt-2 mb-4">Liên hệ Ban Tổ Chức để đăng ký và biết thêm chi tiết về lệ phí tham dự.</p>
-                <a href="#" class="inline-block bg-[#FFA600] text-[#003F5C] font-bold py-3 px-8 rounded-lg hover:bg-yellow-400 transition-colors">ĐĂNG KÝ NGAY</a>
-            </div>
-
-        </main>
-    </div>
-
+    <!-- LOGIC SCRIPT -->
     <script>
-        const tooltipTitleCallback = (tooltipItems) => {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            }
-            return label;
-        };
-
-        const defaultChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#003F5C',
-                        font: {
-                            size: 14,
-                            family: "'Be Vietnam Pro', sans-serif"
-                        }
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        title: tooltipTitleCallback
-                    },
-                    bodyFont: {
-                        family: "'Be Vietnam Pro', sans-serif"
-                    },
-                    titleFont: {
-                        family: "'Be Vietnam Pro', sans-serif"
-                    }
-                }
+        // =========================================================================
+        // 🛠️ KHU VỰC CHỈNH SỬA DỮ LIỆU ĐỘI
+        // =========================================================================
+        // Quy ước: category: 'red' (Đỏ), 'blue' (Xanh)
+        // isReserve: true (Là VĐV thứ 5 trong danh sách)
+        
+        const TEAMS_DATA = [
+            {
+                id: 1,
+                name: "TEAM 1",
+                color: "blue", // Màu theme của team
+                members: [
+                    { name: "Vũ Duy Tùng", category: 'red', role: "C" }, 
+                    { name: "Nguyễn Chương Long", category: 'red' },
+                    { name: "Nguyễn Ngọc Hà", category: 'blue' },
+                    { name: "Hoàng Hiền", category: 'blue' },
+                    { name: "Nguyễn Văn Thành", category: 'red', isReserve: true }
+                ]
             },
-            scales: {
-                y: {
-                    ticks: {
-                        color: '#366682'
-                    },
-                    grid: {
-                        color: '#e0e0e0'
-                    }
-                },
-                x: {
-                    ticks: {
-                        color: '#366682'
-                    },
-                    grid: {
-                        color: '#e0e0e0'
-                    }
-                }
-            }
-        };
-
-        const fundingCtx = document.getElementById('fundingChart').getContext('2d');
-        new Chart(fundingCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Tài trợ từ Sân Hana', 'Lệ phí từ VĐV (Dự kiến)'],
-                datasets: [{
-                    data: [10, 15], 
-                    backgroundColor: ['#003F5C', '#FFA600'],
-                    borderColor: '#FFFFFF',
-                    borderWidth: 4,
-                    hoverOffset: 4
-                }]
+            {
+                id: 2,
+                name: "TEAM 2",
+                color: "emerald",
+                members: [
+                    { name: "Hoàng Ngọc Thạch", category: 'red', role: "C" },
+                    { name: "P.X. Ngọc Hoàng", category: 'red' },
+                    { name: "Đặng Khánh Tùng", category: 'blue' },
+                    { name: "Lê Thị Thanh Vân", category: 'blue' },
+                    { name: "Trần Phi Hùng", category: 'blue', isReserve: true }
+                ]
             },
-            options: {
-                ...defaultChartOptions,
-                plugins: {
-                    ...defaultChartOptions.plugins,
-                    tooltip: {
-                        ...defaultChartOptions.plugins.tooltip,
-                        callbacks: {
-                            ...defaultChartOptions.plugins.tooltip.callbacks,
-                            label: function(context) {
-                                let label = context.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed !== null) {
-                                    label += context.parsed.toLocaleString('vi-VN') + ' triệu VNĐ';
-                                }
-                                return label;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: { display: false },
-                    x: { display: false }
-                }
+            {
+                id: 3,
+                name: "TEAM 3",
+                color: "orange",
+                members: [
+                    { name: "Đỗ Đức Tú", category: 'red', role: "C" },
+                    { name: "Đồng Mạnh Linh", category: 'red' },
+                    { name: "Nguyễn Anh Thư", category: 'blue' },
+                    { name: "Trần Thị Ngọc Mai", category: 'blue' }
+                ]
+            },
+            {
+                id: 4,
+                name: "TEAM 4",
+                color: "purple",
+                members: [
+                    { name: "Nguyễn Nhật Quang", category: 'red', role: "C" },
+                    { name: "Vũ Ngọc Hưng", category: 'red' },
+                    { name: "Lâm Thị Bích Ngọc", category: 'blue' },
+                    { name: "Xuân Huy", category: 'blue' }
+                ]
+            },
+            {
+                id: 5,
+                name: "TEAM 5",
+                color: "pink",
+                members: [
+                    { name: "Lại Hữu Phương", category: 'red', role: "C" },
+                    { name: "Nguyễn Mạnh Thắng", category: 'red' },
+                    { name: "Đặng Thị Chung", category: 'blue' },
+                    { name: "Hoàng Trần Huyền", category: 'blue' },
+                    { name: "Đặng Tiến Anh", category: 'red', isReserve: true }
+                ]
             }
-        });
+        ];
 
-        const contentDescriptions = {
-            'doiNam': `
-                <h3 class="text-xl font-semibold text-[#003F5C] mb-2">Đôi Nam:</h3>
-                <ul class="list-disc list-inside text-gray-700">
-                    <li><strong>Nội dung Phong trào:</strong> Dành cho các VĐV mới chơi, chưa có nhiều kinh nghiệm.</li>
-                    <li><strong>Nội dung Open:</strong> Dành cho các VĐV có kinh nghiệm, trình độ tốt.</li>
-                </ul>
-            `,
-            'doiNu': `
-                <h3 class="text-xl font-semibold text-[#003F5C] mb-2">Đôi Nữ:</h3>
-                <p class="text-gray-700">Bốc thăm ngẫu nhiên, không chia trình độ.</p>
-            `,
-            'doiNamNu': `
-                <h3 class="text-xl font-semibold text-[#003F5C] mb-2">Đôi Nam Nữ:</h3>
-                <p class="text-gray-700">Bốc thăm ngẫu nhiên, không chia trình độ.</p>
-            `
-        };
+        // Lịch thi đấu (Logic xoay vòng 5 đội)
+        // Team nghỉ mỗi lượt: 1->4->2->5->3 (Dựa theo logic xoay vòng chuẩn)
+        const SCHEDULE_DATA = [
+            {
+                round: 1,
+                matches: [
+                    { teamA: 2, teamB: 5 },
+                    { teamA: 3, teamB: 4 }
+                ],
+                rest: 1
+            },
+            {
+                round: 2,
+                matches: [
+                    { teamA: 1, teamB: 5 },
+                    { teamA: 2, teamB: 3 }
+                ],
+                rest: 4
+            },
+            {
+                round: 3,
+                matches: [
+                    { teamA: 1, teamB: 4 },
+                    { teamA: 3, teamB: 5 }
+                ],
+                rest: 2
+            },
+            {
+                round: 4,
+                matches: [
+                    { teamA: 1, teamB: 3 },
+                    { teamA: 2, teamB: 4 }
+                ],
+                rest: 5
+            },
+            {
+                round: 5,
+                matches: [
+                    { teamA: 4, teamB: 5 },
+                    { teamA: 1, teamB: 2 }
+                ],
+                rest: 3
+            }
+        ];
 
-        const doiNamBtn = document.getElementById('doiNamBtn');
-        const doiNuBtn = document.getElementById('doiNuBtn');
-        const doiNamNuBtn = document.getElementById('doiNamNuBtn');
-        const contentDescriptionDiv = document.getElementById('contentDescription');
+        // =========================================================================
+        // ⚙️ RENDER LOGIC
+        // =========================================================================
 
-        function updateContent(contentKey, activeBtn) {
-            contentDescriptionDiv.innerHTML = contentDescriptions[contentKey];
-            document.querySelectorAll('.content-selector').forEach(btn => {
-                btn.classList.remove('active');
-                btn.classList.remove('bg-[#366682]', 'text-white');
-                btn.classList.add('bg-gray-100', 'text-[#003F5C]');
-            });
-            activeBtn.classList.add('active', 'bg-[#366682]', 'text-white');
-            activeBtn.classList.remove('bg-gray-100', 'text-[#003F5C]');
+        function renderTeams() {
+            const container = document.getElementById('teams-container');
+            container.innerHTML = TEAMS_DATA.map(team => {
+                const memberList = team.members.map((mem, index) => {
+                    const icon = '<i class="fas fa-tshirt"></i>'; // Áo đấu
+                    const colorClass = mem.category === 'red' ? 'text-red-team' : 'text-blue-team';
+                    const bgClass = mem.category === 'red' ? 'bg-red-team' : 'bg-blue-team';
+                    const roleBadge = mem.role === 'C' ? '<i class="fas fa-star text-yellow-400 ml-auto" title="Đội Trưởng"></i>' : '';
+                    
+                    if (mem.isReserve) {
+                        return `
+                        <li class="mt-3 pt-3 border-t border-dashed border-slate-200">
+                            <div class="flex items-center text-sm text-slate-500">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-600 mr-2 uppercase">Dự bị</span>
+                                <span class="${colorClass} mr-2">${icon}</span>
+                                <span class="font-medium ${colorClass}">${mem.name}</span>
+                            </div>
+                        </li>`;
+                    }
+
+                    return `
+                    <li class="flex items-center p-2 rounded-lg hover:bg-slate-50 transition">
+                        <span class="w-6 text-center text-slate-300 font-bold text-sm mr-2">${index + 1}</span>
+                        <span class="${colorClass} w-6 text-center mr-1">${icon}</span>
+                        <span class="font-semibold text-slate-700 ${mem.role === 'C' ? 'text-slate-900' : ''}">${mem.name}</span>
+                        ${roleBadge}
+                    </li>`;
+                }).join('');
+
+                return `
+                <div class="team-card bg-white rounded-2xl shadow-sm border-t-4 border-${team.color}-500 overflow-hidden">
+                    <div class="bg-${team.color}-50 p-4 flex justify-between items-center border-b border-${team.color}-100">
+                        <h3 class="text-lg font-black text-${team.color}-700 uppercase">${team.name}</h3>
+                        <span class="text-[10px] font-bold px-2 py-1 bg-white text-${team.color}-600 rounded-full shadow-sm">
+                            ${team.members.length} VĐV
+                        </span>
+                    </div>
+                    <ul class="p-4 space-y-1">
+                        ${memberList}
+                    </ul>
+                </div>`;
+            }).join('');
         }
 
-        doiNamBtn.addEventListener('click', () => updateContent('doiNam', doiNamBtn));
-        doiNuBtn.addEventListener('click', () => updateContent('doiNu', doiNuBtn));
-        doiNamNuBtn.addEventListener('click', () => updateContent('doiNamNu', doiNamNuBtn));
+        function renderSchedule() {
+            const tabContainer = document.getElementById('round-tabs');
+            const matchesContainer = document.getElementById('matches-container');
 
-        updateContent('doiNam', doiNamBtn);
+            // Render Tabs
+            tabContainer.innerHTML = SCHEDULE_DATA.map((round, idx) => `
+                <button onclick="switchRound(${round.round})" id="tab-${round.round}" 
+                    class="tab-btn px-6 py-2 rounded-full font-bold text-sm whitespace-nowrap border transition hover:bg-blue-50 ${idx === 0 ? 'active' : 'border-slate-200 text-slate-500'}">
+                    Lượt ${round.round}
+                </button>
+            `).join('');
+
+            // Initial Render Round 1
+            switchRound(1);
+        }
+
+        window.switchRound = function(roundNum) {
+            // Update Tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('border-slate-200', 'text-slate-500');
+            });
+            const activeTab = document.getElementById(`tab-${roundNum}`);
+            activeTab.classList.add('active');
+            activeTab.classList.remove('border-slate-200', 'text-slate-500');
+
+            // Render Matches
+            const roundData = SCHEDULE_DATA.find(r => r.round === roundNum);
+            const container = document.getElementById('matches-container');
+            
+            const matchesHtml = roundData.matches.map((m, idx) => {
+                const tA = TEAMS_DATA.find(t => t.id === m.teamA);
+                const tB = TEAMS_DATA.find(t => t.id === m.teamB);
+                
+                return `
+                <div class="match-card bg-white border border-slate-200 rounded-xl p-4 mb-4 border-l-blue-500 flex flex-col md:flex-row items-center justify-between shadow-sm animate-fade-in" style="animation-delay: ${idx * 0.1}s">
+                    <div class="flex items-center justify-end w-full md:w-5/12 space-x-3 mb-2 md:mb-0">
+                        <span class="font-bold text-lg text-slate-800 text-right">${tA.name}</span>
+                        <div class="w-8 h-8 rounded-full bg-${tA.color}-100 text-${tA.color}-600 flex items-center justify-center font-bold text-xs border border-${tA.color}-200">A</div>
+                    </div>
+                    
+                    <div class="w-full md:w-2/12 flex justify-center py-2">
+                        <span class="bg-slate-100 text-slate-500 font-black text-xs px-3 py-1 rounded-full">VS</span>
+                    </div>
+
+                    <div class="flex items-center justify-start w-full md:w-5/12 space-x-3 mt-2 md:mt-0">
+                        <div class="w-8 h-8 rounded-full bg-${tB.color}-100 text-${tB.color}-600 flex items-center justify-center font-bold text-xs border border-${tB.color}-200">B</div>
+                        <span class="font-bold text-lg text-slate-800 text-left">${tB.name}</span>
+                    </div>
+                </div>`;
+            }).join('');
+
+            const restTeam = TEAMS_DATA.find(t => t.id === roundData.rest);
+            const restHtml = `
+                <div class="mt-6 p-3 bg-yellow-50 text-yellow-700 text-sm rounded-lg flex items-center justify-center border border-yellow-100 animate-fade-in" style="animation-delay: 0.3s">
+                    <i class="fas fa-bed mr-2"></i> 
+                    <span class="font-medium">Nghỉ lượt này: <strong>${restTeam.name}</strong></span>
+                </div>
+            `;
+
+            container.innerHTML = matchesHtml + restHtml;
+        }
+
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Init
+        renderTeams();
+        renderSchedule();
+
     </script>
-
 </body>
 </html>
